@@ -2,6 +2,8 @@
 /* Prof.: Silvana Rossetto */
 /* Módulo 1 - Laboratório: 1 */
 /* Codigo: "Caculando o quadrado de números de forma multi-thread" usando threads em C */
+/* Aluno: Raphael Mesquita */ 
+/* DRE: 118020104 */ 
 
 #include <stdio.h>
 #include <stdlib.h>
