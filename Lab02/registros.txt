@@ -1,0 +1,360 @@
+Iniciando multiplicacao de matrizes com dim = 500 e 1 threads
+Inicializacao das estruturas de dados durou 0.003381 segundos
+Multiplicacao multithread durou 0.513915 segundos
+Finalização do programa durou 0.000289 segundos
+Programa durou um total de 0.517585 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 1 threads
+Inicializacao das estruturas de dados durou 0.003858 segundos
+Multiplicacao multithread durou 0.482330 segundos
+Finalização do programa durou 0.000306 segundos
+Programa durou um total de 0.486493 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 1 threads
+Inicializacao das estruturas de dados durou 0.005140 segundos
+Multiplicacao multithread durou 0.496324 segundos
+Finalização do programa durou 0.000300 segundos
+Programa durou um total de 0.501764 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 1 threads
+Inicializacao das estruturas de dados durou 0.003812 segundos
+Multiplicacao multithread durou 0.493768 segundos
+Finalização do programa durou 0.000270 segundos
+Programa durou um total de 0.497850 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 1 threads
+Inicializacao das estruturas de dados durou 0.003352 segundos
+Multiplicacao multithread durou 0.519182 segundos
+Finalização do programa durou 0.000298 segundos
+Programa durou um total de 0.522832 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 2 threads
+Inicializacao das estruturas de dados durou 0.003661 segundos
+Multiplicacao multithread durou 0.265676 segundos
+Finalização do programa durou 0.000352 segundos
+Programa durou um total de 0.269690 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 2 threads
+Inicializacao das estruturas de dados durou 0.002125 segundos
+Multiplicacao multithread durou 0.265790 segundos
+Finalização do programa durou 0.000252 segundos
+Programa durou um total de 0.268167 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 2 threads
+Inicializacao das estruturas de dados durou 0.004391 segundos
+Multiplicacao multithread durou 0.257950 segundos
+Finalização do programa durou 0.000258 segundos
+Programa durou um total de 0.262599 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 2 threads
+Inicializacao das estruturas de dados durou 0.004487 segundos
+Multiplicacao multithread durou 0.248052 segundos
+Finalização do programa durou 0.000291 segundos
+Programa durou um total de 0.252830 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 2 threads
+Inicializacao das estruturas de dados durou 0.004471 segundos
+Multiplicacao multithread durou 0.254677 segundos
+Finalização do programa durou 0.000322 segundos
+Programa durou um total de 0.259470 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 4 threads
+Inicializacao das estruturas de dados durou 0.004140 segundos
+Multiplicacao multithread durou 0.215577 segundos
+Finalização do programa durou 0.000323 segundos
+Programa durou um total de 0.220040 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 4 threads
+Inicializacao das estruturas de dados durou 0.003679 segundos
+Multiplicacao multithread durou 0.131119 segundos
+Finalização do programa durou 0.000292 segundos
+Programa durou um total de 0.135090 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 4 threads
+Inicializacao das estruturas de dados durou 0.003753 segundos
+Multiplicacao multithread durou 0.142703 segundos
+Finalização do programa durou 0.000267 segundos
+Programa durou um total de 0.146723 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 4 threads
+Inicializacao das estruturas de dados durou 0.003669 segundos
+Multiplicacao multithread durou 0.143730 segundos
+Finalização do programa durou 0.000271 segundos
+Programa durou um total de 0.147670 segundos
+
+Iniciando multiplicacao de matrizes com dim = 500 e 4 threads
+Inicializacao das estruturas de dados durou 0.003894 segundos
+Multiplicacao multithread durou 0.136499 segundos
+Finalização do programa durou 0.000261 segundos
+Programa durou um total de 0.140654 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 1 threads
+Inicializacao das estruturas de dados durou 0.012225 segundos
+Multiplicacao multithread durou 4.045606 segundos
+Finalização do programa durou 0.001154 segundos
+Programa durou um total de 4.058985 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 1 threads
+Inicializacao das estruturas de dados durou 0.009439 segundos
+Multiplicacao multithread durou 4.091553 segundos
+Finalização do programa durou 0.001135 segundos
+Programa durou um total de 4.102127 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 1 threads
+Inicializacao das estruturas de dados durou 0.010588 segundos
+Multiplicacao multithread durou 4.016355 segundos
+Finalização do programa durou 0.001005 segundos
+Programa durou um total de 4.027948 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 1 threads
+Inicializacao das estruturas de dados durou 0.010838 segundos
+Multiplicacao multithread durou 4.079517 segundos
+Finalização do programa durou 0.000994 segundos
+Programa durou um total de 4.091349 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 1 threads
+Inicializacao das estruturas de dados durou 0.010740 segundos
+Multiplicacao multithread durou 4.206170 segundos
+Finalização do programa durou 0.001075 segundos
+Programa durou um total de 4.217985 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 2 threads
+Inicializacao das estruturas de dados durou 0.012242 segundos
+Multiplicacao multithread durou 2.027018 segundos
+Finalização do programa durou 0.001012 segundos
+Programa durou um total de 2.040271 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 2 threads
+Inicializacao das estruturas de dados durou 0.012096 segundos
+Multiplicacao multithread durou 2.182087 segundos
+Finalização do programa durou 0.001061 segundos
+Programa durou um total de 2.195244 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 2 threads
+Inicializacao das estruturas de dados durou 0.012330 segundos
+Multiplicacao multithread durou 2.101974 segundos
+Finalização do programa durou 0.001261 segundos
+Programa durou um total de 2.115565 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 2 threads
+Inicializacao das estruturas de dados durou 0.012221 segundos
+Multiplicacao multithread durou 2.035281 segundos
+Finalização do programa durou 0.001025 segundos
+Programa durou um total de 2.048528 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 2 threads
+Inicializacao das estruturas de dados durou 0.012031 segundos
+Multiplicacao multithread durou 2.125976 segundos
+Finalização do programa durou 0.000629 segundos
+Programa durou um total de 2.138636 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 4 threads
+Inicializacao das estruturas de dados durou 0.011719 segundos
+Multiplicacao multithread durou 1.019762 segundos
+Finalização do programa durou 0.001391 segundos
+Programa durou um total de 1.032871 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 4 threads
+Inicializacao das estruturas de dados durou 0.011183 segundos
+Multiplicacao multithread durou 1.050899 segundos
+Finalização do programa durou 0.001104 segundos
+Programa durou um total de 1.063187 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 4 threads
+Inicializacao das estruturas de dados durou 0.012736 segundos
+Multiplicacao multithread durou 1.027815 segundos
+Finalização do programa durou 0.001050 segundos
+Programa durou um total de 1.041600 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 4 threads
+Inicializacao das estruturas de dados durou 0.011224 segundos
+Multiplicacao multithread durou 1.034885 segundos
+Finalização do programa durou 0.000996 segundos
+Programa durou um total de 1.047105 segundos
+
+Iniciando multiplicacao de matrizes com dim = 1000 e 4 threads
+Inicializacao das estruturas de dados durou 0.011389 segundos
+Multiplicacao multithread durou 1.029235 segundos
+Finalização do programa durou 0.001046 segundos
+Programa durou um total de 1.041670 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 1 threads
+Inicializacao das estruturas de dados durou 0.035627 segundos
+Multiplicacao multithread durou 42.039078 segundos
+Finalização do programa durou 0.004405 segundos
+Programa durou um total de 42.079109 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 1 threads
+Inicializacao das estruturas de dados durou 0.033110 segundos
+Multiplicacao multithread durou 41.703801 segundos
+Finalização do programa durou 0.004389 segundos
+Programa durou um total de 41.741299 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 1 threads
+Inicializacao das estruturas de dados durou 0.036431 segundos
+Multiplicacao multithread durou 41.693711 segundos
+Finalização do programa durou 0.003901 segundos
+Programa durou um total de 41.734043 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 1 threads
+Inicializacao das estruturas de dados durou 0.031902 segundos
+Multiplicacao multithread durou 41.887456 segundos
+Finalização do programa durou 0.004292 segundos
+Programa durou um total de 41.923650 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 1 threads
+Inicializacao das estruturas de dados durou 0.034623 segundos
+Multiplicacao multithread durou 42.034051 segundos
+Finalização do programa durou 0.004363 segundos
+Programa durou um total de 42.073038 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 2 threads
+Inicializacao das estruturas de dados durou 0.034131 segundos
+Multiplicacao multithread durou 20.822327 segundos
+Finalização do programa durou 0.004361 segundos
+Programa durou um total de 20.860819 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 2 threads
+Inicializacao das estruturas de dados durou 0.033311 segundos
+Multiplicacao multithread durou 20.522425 segundos
+Finalização do programa durou 0.002500 segundos
+Programa durou um total de 20.558237 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 2 threads
+Inicializacao das estruturas de dados durou 0.036931 segundos
+Multiplicacao multithread durou 20.750696 segundos
+Finalização do programa durou 0.004212 segundos
+Programa durou um total de 20.791838 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 2 threads
+Inicializacao das estruturas de dados durou 0.033187 segundos
+Multiplicacao multithread durou 21.229548 segundos
+Finalização do programa durou 0.004001 segundos
+Programa durou um total de 21.266736 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 2 threads
+Inicializacao das estruturas de dados durou 0.034367 segundos
+Multiplicacao multithread durou 20.889288 segundos
+Finalização do programa durou 0.004008 segundos
+Programa durou um total de 20.927663 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 4 threads
+Inicializacao das estruturas de dados durou 0.032893 segundos
+Multiplicacao multithread durou 10.230667 segundos
+Finalização do programa durou 0.002720 segundos
+Programa durou um total de 10.266280 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 4 threads
+Inicializacao das estruturas de dados durou 0.034930 segundos
+Multiplicacao multithread durou 10.184951 segundos
+Finalização do programa durou 0.004530 segundos
+Programa durou um total de 10.224410 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 4 threads
+Inicializacao das estruturas de dados durou 0.033254 segundos
+Multiplicacao multithread durou 10.253353 segundos
+Finalização do programa durou 0.005191 segundos
+Programa durou um total de 10.291799 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 4 threads
+Inicializacao das estruturas de dados durou 0.032141 segundos
+Multiplicacao multithread durou 10.185231 segundos
+Finalização do programa durou 0.002633 segundos
+Programa durou um total de 10.220005 segundos
+
+Iniciando multiplicacao de matrizes com dim = 2000 e 4 threads
+Inicializacao das estruturas de dados durou 0.033723 segundos
+Multiplicacao multithread durou 9.962581 segundos
+Finalização do programa durou 0.004803 segundos
+Programa durou um total de 10.001107 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 500
+Inicializacao das estruturas de dados durou 0.003688 segundos
+Multiplicacao sequencial durou 0.483788 segundos
+Finalização do programa durou 0.000206 segundos
+Programa durou um total de 0.487682 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 500
+Inicializacao das estruturas de dados durou 0.003810 segundos
+Multiplicacao sequencial durou 0.522211 segundos
+Finalização do programa durou 0.000254 segundos
+Programa durou um total de 0.526276 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 500
+Inicializacao das estruturas de dados durou 0.002276 segundos
+Multiplicacao sequencial durou 0.490680 segundos
+Finalização do programa durou 0.000267 segundos
+Programa durou um total de 0.493222 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 500
+Inicializacao das estruturas de dados durou 0.003852 segundos
+Multiplicacao sequencial durou 0.482697 segundos
+Finalização do programa durou 0.000252 segundos
+Programa durou um total de 0.486801 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 500
+Inicializacao das estruturas de dados durou 0.003680 segundos
+Multiplicacao sequencial durou 0.482046 segundos
+Finalização do programa durou 0.000201 segundos
+Programa durou um total de 0.485927 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 1000
+Inicializacao das estruturas de dados durou 0.011187 segundos
+Multiplicacao sequencial durou 3.973308 segundos
+Finalização do programa durou 0.000743 segundos
+Programa durou um total de 3.985238 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 1000
+Inicializacao das estruturas de dados durou 0.012979 segundos
+Multiplicacao sequencial durou 4.140983 segundos
+Finalização do programa durou 0.001013 segundos
+Programa durou um total de 4.154975 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 1000
+Inicializacao das estruturas de dados durou 0.011292 segundos
+Multiplicacao sequencial durou 3.976300 segundos
+Finalização do programa durou 0.000773 segundos
+Programa durou um total de 3.988364 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 1000
+Inicializacao das estruturas de dados durou 0.012256 segundos
+Multiplicacao sequencial durou 4.162007 segundos
+Finalização do programa durou 0.000689 segundos
+Programa durou um total de 4.174952 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 1000
+Inicializacao das estruturas de dados durou 0.011201 segundos
+Multiplicacao sequencial durou 4.077443 segundos
+Finalização do programa durou 0.000710 segundos
+Programa durou um total de 4.089354 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 2000
+Inicializacao das estruturas de dados durou 0.032256 segundos
+Multiplicacao sequencial durou 42.050661 segundos
+Finalização do programa durou 0.003085 segundos
+Programa durou um total de 42.086002 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 2000
+Inicializacao das estruturas de dados durou 0.033379 segundos
+Multiplicacao sequencial durou 42.701318 segundos
+Finalização do programa durou 0.002967 segundos
+Programa durou um total de 42.737664 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 2000
+Inicializacao das estruturas de dados durou 0.032810 segundos
+Multiplicacao sequencial durou 42.063222 segundos
+Finalização do programa durou 0.002646 segundos
+Programa durou um total de 42.098677 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 2000
+Inicializacao das estruturas de dados durou 0.035920 segundos
+Multiplicacao sequencial durou 41.835115 segundos
+Finalização do programa durou 0.003120 segundos
+Programa durou um total de 41.874154 segundos
+
+Iniciando multiplicacao sequencial de matrizes com dim = 2000
+Inicializacao das estruturas de dados durou 0.033860 segundos
+Multiplicacao sequencial durou 42.012525 segundos
+Finalização do programa durou 0.002760 segundos
+Programa durou um total de 42.049146 segundos
+
