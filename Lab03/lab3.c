@@ -10,6 +10,8 @@
 #include <pthread.h>
 #include "timer.h"
 
+#define NUM_EXECS 10
+
 typedef struct {
   float menor;
   float maior;
@@ -20,11 +22,13 @@ long long int N;
 float *vetor;
 
 void initVetor() {
-  double now;
+  // double now;
   for(long long int i = 0; i < N; i++) {
-    GET_TIME(now);
-    long int randomNumber = ((long int)(now*1000000000))%10000;
-    vetor[i] = randomNumber / 1000.0;
+    // GET_TIME(now);
+    // long int randomNumber = ((long int)(now*1000000000))%10000;
+    // vetor[i] = randomNumber / 1000.0;
+
+    vetor[i] = 1000.0/(i+1);
   }
 }
 
@@ -34,7 +38,6 @@ t_result achaMenorMaiorSeq() {
   resultadoSeq.menor = -1.0;
 
   for(long long int i = 0; i < N; i++) {
-    printf("%f ", vetor[i]);
     if(resultadoSeq.menor == -1.0) {
       resultadoSeq.menor = vetor[i];
     } else {
@@ -69,21 +72,12 @@ void* achaMenorMaiorConc(void* args) {
   else fim = ini + tamBloc;
 
   for(long long int i = ini; i < fim; i++) {
-    printf("%f ", vetor[i]);
-    if(resultadoThread->menor == -1.0) {
+    if(resultadoThread->menor == -1.0 || resultadoThread->menor > vetor[i]) {
       resultadoThread->menor = vetor[i];
-    } else {
-      if(resultadoThread->menor > vetor[i]) {
-        resultadoThread->menor = vetor[i];
-      }
-    }
+    } 
 
-    if(resultadoThread->maior == -1.0) {
+    if(resultadoThread->maior == -1.0 || resultadoThread->maior < vetor[i]) {
       resultadoThread->maior = vetor[i];
-    } else {
-      if(resultadoThread->maior < vetor[i]) {
-        resultadoThread->maior = vetor[i];
-      }
     }
   }
   pthread_exit((void*) resultadoThread);
@@ -113,6 +107,9 @@ int main(int argc, char* args[]) {
   resultadoConc.maior = -1.0;
   resultadoConc.menor = -1.0;
 
+  double iniSeq, fimSeq, iniConc, fimConc;
+  double mediaSeq = 0.0, mediaConc = 0.0;
+
   for(long int i = 0; i < N_THREADS; i++) {
     if(pthread_create(tid+i, NULL, achaMenorMaiorConc, (void*)i)) { printf("Erro-pthread_create\n"); return 3;}
   }
@@ -130,11 +127,48 @@ int main(int argc, char* args[]) {
   }
 
   t_result resultadoSeq = achaMenorMaiorSeq();
-  
-  printf("\n");
 
-  printf("Maior: %f\nMenor: %f\n", resultadoSeq.maior, resultadoSeq.menor);
-  printf("Maior: %f\nMenor: %f\n", resultadoConc.maior, resultadoConc.menor);
+  if(resultadoSeq.maior == resultadoConc.maior && resultadoSeq.menor == resultadoConc.menor)
+    printf("Resultados iguais\n");
+  else
+    printf("Resultados diferentes\n");
+
+  for(int i = 0; i < NUM_EXECS; i++) {
+    GET_TIME(iniConc);
+    for(long int i = 0; i < N_THREADS; i++) {
+      if(pthread_create(tid+i, NULL, achaMenorMaiorConc, (void*)i)) { printf("Erro-pthread_create\n"); return 3;}
+    }
+
+    for(int i = 0; i < N_THREADS; i++) {
+      if(pthread_join(*(tid+i), (void**)&resultadoThread)) { printf("Erro-pthread_create\n"); return 3;}
+      if(resultadoConc.menor == -1.0 || resultadoThread->menor < resultadoConc.menor) {
+        resultadoConc.menor = resultadoThread->menor;
+      }
+      if(resultadoConc.maior == -1.0 || resultadoThread->maior > resultadoConc.maior) {
+        resultadoConc.maior = resultadoThread->maior;
+      }
+
+      free(resultadoThread);
+    }
+    GET_TIME(fimConc);
+
+    mediaConc += fimConc - iniConc;
+    // printf("Tempo Conc: %lf\n", fimConc - iniConc);
+    // printf("Tempo Seq: %lf\n", fimSeq - iniSeq);
+  }
+
+  for(int i = 0; i < NUM_EXECS; i++) {
+    GET_TIME(iniSeq);
+    achaMenorMaiorSeq();
+    GET_TIME(fimSeq);
+    mediaSeq += fimSeq - iniSeq;
+  }
+
+  printf("\nMedia Sequencial com dimensao %lld: %lf segundos\n", N, mediaSeq / NUM_EXECS);
+  printf("Media Concorrente com dimensao %lld e %d threads: %lf segundos\n", N, N_THREADS, mediaConc / NUM_EXECS);
+
+  free(tid);
+  free(vetor);
 
   return 0;
 }
