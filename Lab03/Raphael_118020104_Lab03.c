@@ -1,7 +1,7 @@
 /* Disciplina: Computacao Concorrente */
 /* Prof.: Silvana Rossetto */
 /* Módulo 1 - Laboratório: 3 */
-/* Codigo:  */
+/* Codigo: Encontrado o menor e maior valor de um vetor com uma ou mais threads */
 /* Aluno: Raphael Mesquita */ 
 /* DRE: 118020104 */ 
 
@@ -10,28 +10,29 @@
 #include <pthread.h>
 #include "timer.h"
 
+// Numero de execucoes para calcular a media de tempo
+// para a forma sequencial e concorrente do programa
 #define NUM_EXECS 10
 
+// Struct que contém o necessário para passar para cada thread.
 typedef struct {
   float menor;
   float maior;
 } t_result;
 
-int N_THREADS;
-long long int N;
-float *vetor;
+int N_THREADS; // Variável global para guardar o número de threads
+long long int N; // Variável global para guardar a dimensão do vetor
+float *vetor; // Variável global que guarda o vetor utilizado no programa
 
+// Função que inicializa o vetor com valores
+// pseudo aleatórios e positivos
 void initVetor() {
-  // double now;
   for(long long int i = 0; i < N; i++) {
-    // GET_TIME(now);
-    // long int randomNumber = ((long int)(now*1000000000))%10000;
-    // vetor[i] = randomNumber / 1000.0;
-
     vetor[i] = 1000.0/(i+1);
   }
 }
 
+// Função que acha o menor e o maior valor no vetor global
 t_result achaMenorMaiorSeq() {
   t_result resultadoSeq;
   resultadoSeq.maior = -1.0;
@@ -58,6 +59,9 @@ t_result achaMenorMaiorSeq() {
   return resultadoSeq;
 }
 
+// Função que acha o menor e o maior valor no vetor global.
+// Cada thread vai verificar uma parte do vetor e retornar
+// seu resultado.
 void* achaMenorMaiorConc(void* args) {
   long long int id = (long long int) args;
   t_result* resultadoThread;
@@ -83,8 +87,9 @@ void* achaMenorMaiorConc(void* args) {
   pthread_exit((void*) resultadoThread);
 }
 
+// Função principal do programa
 int main(int argc, char* args[]) {
-  if(argc < 3) {
+  if(argc < 3) { // Verifica se tem a quantidade mínima de argumentos
     fprintf(stderr, "Digite: %s <numero de elementos> <numero de threads>\n", args[0]);
     return 1;
   }
@@ -96,8 +101,9 @@ int main(int argc, char* args[]) {
   if(vetor == NULL) {
     fprintf(stderr, "ERRO-malloc\n"); return 2;
   }
-  initVetor();
+  initVetor(); // Inicializa o vetor com tamanho N
 
+  // Inicialização das estruturas de dados
   pthread_t* tid;
   tid = (pthread_t*)malloc(sizeof(pthread_t) * N_THREADS);
 
@@ -107,9 +113,11 @@ int main(int argc, char* args[]) {
   resultadoConc.maior = -1.0;
   resultadoConc.menor = -1.0;
 
+  // Declarando as variáveis que vão aguardar o tempo de execução de cada etapa do programa 
   double iniSeq, fimSeq, iniConc, fimConc;
   double mediaSeq = 0.0, mediaConc = 0.0;
 
+  // Primeira execução concorrente para verificar a corretude da solução concorrente
   for(long int i = 0; i < N_THREADS; i++) {
     if(pthread_create(tid+i, NULL, achaMenorMaiorConc, (void*)i)) { printf("Erro-pthread_create\n"); return 3;}
   }
@@ -126,6 +134,7 @@ int main(int argc, char* args[]) {
     free(resultadoThread);
   }
 
+  // Primeira execução sequencial para verificar a corretude da solução concorrente
   t_result resultadoSeq = achaMenorMaiorSeq();
 
   if(resultadoSeq.maior == resultadoConc.maior && resultadoSeq.menor == resultadoConc.menor)
@@ -133,7 +142,10 @@ int main(int argc, char* args[]) {
   else
     printf("Resultados diferentes\n");
 
+  // Sequência de execuções concorrentes para calcular a média de tempo decorrido
   for(int i = 0; i < NUM_EXECS; i++) {
+    resultadoConc.maior = -1.0;
+    resultadoConc.menor = -1.0;
     GET_TIME(iniConc);
     for(long int i = 0; i < N_THREADS; i++) {
       if(pthread_create(tid+i, NULL, achaMenorMaiorConc, (void*)i)) { printf("Erro-pthread_create\n"); return 3;}
@@ -153,10 +165,9 @@ int main(int argc, char* args[]) {
     GET_TIME(fimConc);
 
     mediaConc += fimConc - iniConc;
-    // printf("Tempo Conc: %lf\n", fimConc - iniConc);
-    // printf("Tempo Seq: %lf\n", fimSeq - iniSeq);
   }
 
+  // Sequência de execuções sequenciais para calcular a média de tempo decorrido
   for(int i = 0; i < NUM_EXECS; i++) {
     GET_TIME(iniSeq);
     achaMenorMaiorSeq();
@@ -164,8 +175,10 @@ int main(int argc, char* args[]) {
     mediaSeq += fimSeq - iniSeq;
   }
 
+  // Finalização do programa
   printf("\nMedia Sequencial com dimensao %lld: %lf segundos\n", N, mediaSeq / NUM_EXECS);
   printf("Media Concorrente com dimensao %lld e %d threads: %lf segundos\n", N, N_THREADS, mediaConc / NUM_EXECS);
+  printf("Aceleracao foi de %lf\n\n\n", (mediaConc / NUM_EXECS) / (mediaSeq / NUM_EXECS));
 
   free(tid);
   free(vetor);
