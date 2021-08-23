@@ -1,6 +1,6 @@
 /* Disciplina: Computacao Concorrente */
 /* Prof.: Silvana Rossetto */
-/* Módulo 1 - Laboratório: 4 */
+/* Módulo 2 - Laboratório: 4 */
 /* Codigo: Ordem de execução das threads controlada pela sincronização condicional com variáveis de condição */
 /* Aluno: Raphael Mesquita */ 
 /* DRE: 118020104 */ 
