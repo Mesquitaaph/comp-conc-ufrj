@@ -24,6 +24,46 @@ void printNumeros() {
   printf("\n");
 }
 
+void barreiraSoma(long long int id, int somaLocal) {
+  // Seção crítica que soma os inteiros na variavel somaLocal
+  pthread_mutex_lock(&x_mutex);
+
+  // Lógica da barreira
+  // A última thread a chegar na barreira. Libera todas as threads, incluindo a si mesma, para seguir suas execuções
+  if(bloqueadas == N_THREADS-1) {
+    printf("Thread id = %lld -> soma = %d (ultima a chegar)\n\n", id, somaLocal);
+
+    pthread_cond_broadcast(&x_cond);
+    bloqueadas=0;
+  } else {
+    bloqueadas++;
+    printf("Thread id = %lld -> soma = %d (esperando)\n", id, somaLocal);
+    pthread_cond_wait(&x_cond, &x_mutex);
+  }
+
+  pthread_mutex_unlock(&x_mutex);
+}
+
+void barreiraVetor(long long int id) {
+  // Seção crítica que redefine os inteiros do vetor numeros
+  pthread_mutex_lock(&x_mutex);
+
+  // Lógica da barreira
+  // A última thread a chegar na barreira. Libera todas as threads, incluindo a si mesma, para seguir suas execuções
+  if(bloqueadas == N_THREADS-1) {
+    printf("Thread id = %lld -> numero gerado = %d (ultima a chegar)\n", id, numeros[id]);
+    printf("Novo vetor: "); printNumeros(); printf("\n");
+
+    pthread_cond_broadcast(&x_cond);
+    bloqueadas=0;
+  } else {
+    bloqueadas++;
+    printf("Thread id = %lld -> numero gerado = %d (esperando)\n", id, numeros[id]);
+    pthread_cond_wait(&x_cond, &x_mutex);
+  }
+  pthread_mutex_unlock(&x_mutex);
+}
+
 // Função única para todas as threads. 
 // Soma os inteiros no vetor numeros e redefine, com inteiros aleatorios, seus elementos.
 // Esse processo se repete N_THREADS vezes.
@@ -32,44 +72,13 @@ void* somaInteiros(void* arg) {
   int* somaLocal = (int*) malloc(sizeof(int));
 
   for(int i = 0; i < N_THREADS; i++) {
-    // Seção crítica que soma os inteiros na variavel somaLocal
-    pthread_mutex_lock(&x_mutex);
-      for(int j = 0; j< N_THREADS; j++) {
-        *somaLocal += numeros[j];
-      }
+    for(int j = 0; j< N_THREADS; j++) {
+      *somaLocal += numeros[j];
+    }
+    barreiraSoma(id, *somaLocal);
 
-      // Lógica da barreira
-      // A última thread a chegar na barreira. Libera todas as threads, incluindo a si mesma, para seguir suas execuções
-      if(bloqueadas == N_THREADS-1) {
-        printf("Thread id = %lld -> soma = %d (ultima a chegar)\n\n", id, *somaLocal);
-
-        pthread_cond_broadcast(&x_cond);
-        bloqueadas=0;
-      } else {
-        bloqueadas++;
-        printf("Thread id = %lld -> soma = %d (esperando)\n", id, *somaLocal);
-        pthread_cond_wait(&x_cond, &x_mutex);
-      }
-    pthread_mutex_unlock(&x_mutex);
-
-    // Seção crítica que redefine os inteiros do vetor numeros
-    pthread_mutex_lock(&x_mutex);
-      numeros[id] = id == 0 ? (rand() * (id+1)) % 10 : (rand() * id) % 10;
-
-      // Lógica da barreira
-      // A última thread a chegar na barreira. Libera todas as threads, incluindo a si mesma, para seguir suas execuções
-      if(bloqueadas == N_THREADS-1) {
-        printf("Thread id = %lld -> numero gerado = %d (ultima a chegar)\n", id, numeros[id]);
-        printf("Novo vetor: "); printNumeros(); printf("\n");
-
-        pthread_cond_broadcast(&x_cond);
-        bloqueadas=0;
-      } else {
-        bloqueadas++;
-        printf("Thread id = %lld -> numero gerado = %d (esperando)\n", id, numeros[id]);
-        pthread_cond_wait(&x_cond, &x_mutex);
-      }
-    pthread_mutex_unlock(&x_mutex);
+    numeros[id] = id == 0 ? (rand() * (id+1)) % 10 : (rand() * id) % 10;    
+    barreiraVetor(id);
   }
   
   printf("Thread id = %lld -> soma = %d\n", id, *somaLocal);
