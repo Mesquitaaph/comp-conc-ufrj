@@ -1,3 +1,11 @@
+/* Disciplina: Computacao Concorrente */
+/* Prof.: Silvana Rossetto */
+/* Módulo 2 - Laboratório: 7 */
+/* Codigo: Implementação de threads leitoras e escritoras utilizando monitor em Java */
+/* Aluno: Raphael Mesquita */ 
+/* DRE: 118020104 */ 
+
+// Classe que contém o número inteiro (recurso compartilhado) e os métodos que o envolvem
 class Numero {
 	private int numero; // Recurso compartilhado entre as threads
 	private boolean pyLog; // Variável que determina se o programa vai imprimir um log .py ou um log que o enunciado da atividade pede
