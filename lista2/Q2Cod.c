@@ -34,9 +34,10 @@ void * T1 (void * t) {
     contador++;
     if(contador % 100 == 0) {
       pthread_cond_signal(&x_cond);
+      pthread_cond_wait(&x_cond, &x_mutex);
     }
     pthread_mutex_unlock(&x_mutex);
-    for(int i = 0; i < delay; i++) {}
+    // for(int i = 0; i < delay; i++) {}
   }
   pthread_exit(NULL);
 }
@@ -46,6 +47,7 @@ void * T2 () {
     pthread_mutex_lock(&x_mutex);
     pthread_cond_wait(&x_cond, &x_mutex);
     printf("%lld\n", contador);
+    pthread_cond_signal(&x_cond);
     pthread_mutex_unlock(&x_mutex);
   }
   pthread_exit(NULL);
