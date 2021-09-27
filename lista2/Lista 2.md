@@ -55,3 +55,45 @@ void * T2 () {
 	pthread_exit(NULL);
 }
 ```
+
+### Questão 3:
+a) 
+<p>
+
+A primeira etapa do programa se dá pela instanciação de um objeto da classe _FilaTarefas_. Quando a instância é criada, as threads são iniciadas. Após isso, com a fila de tarefas vazia, elas aguardam tarefas serem escalonadas, com o método `queue.wait()`.</p>
+
+<p>
+
+Uma vez escalonada, a tarefa entra na fila, com `queue.addLast(r)`, e envia uma notificação,  com `queue.notify()`, à primeira thread aguardando.</p>
+
+<p>
+
+Ao receber a notificação, a thread sai do estado "esperando", verifica se há realmente tarefas na fila e verifica se o programa está encerrando. Com a fila não vazia ou aplicação não encerrando, a sua execução segue normal para a tarefa que realizou a notificação, removendo-a da fila de tarefas. Após completá-la, a thread aguarda novamente outra tarefa.</p>
+
+<p>
+
+Ao encerrar o programa, o método `shutdown()` é chamado. Este altera o atributo privado de _FilaTarefas_ para `true`. Esta condição faz uma thread que recém finalizou uma tarefa, finalize sua execução caso não haja mais tarefas na fila. Assim, quando todas as threads terminam, o programa termina.</p>
+ 
+<br>
+
+b) 
+<p>
+
+Apesar da explicação do item anterior mostrar, de fato, o que o programa faz, faltou explicar o que acontece num caso em específico: o de não haver mais tarefas a se executar **antes** do método `shutdown()` ser chamado.</p>
+
+<p>
+
+Nesse caso, a fila de tarefas estará vazia e, por isso, as threads vão aguardar com o `queue.wait()`, necessitando de notificações para serem liberadas. Mas o `shutdown()` não notifica. Isso faz com que o programa não encerre, pois estará sempre aguardando as threads finalizarem, o que não acontecerá.</p>
+
+<p>
+
+Assim, uma forma fácil de resolver este problema é colocar o método `queue.notifyAll()` ao encerrar o programa. Essa mudança faz com que a aplicação libere todas as threads travadas no seu encerramento. Teríamos então:</p>
+
+```c
+public void shutdown() {
+  synchronized(queue) { this.shutdown=true; queue.notifyAll(); }
+  for (int i=0; i<nThreads; i++)
+    try { threads[i].join(); }
+    catch (InterruptedException e) {return;}
+}
+```
