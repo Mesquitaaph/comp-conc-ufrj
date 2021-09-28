@@ -1,17 +1,15 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
 
 #define NTHREADS 4
-// T1 - “Fique a vontade.”
-// T2 - “Seja bem-vindo!”
-// T3 - “Volte sempre!”
-// T4 - “Sente-se por favor.”
 
 // Variaveis globais
 int msgs = 2; // Número de mensagens a serem impressas depois da T1 e antes da T3
-sem_t em, cond_stay, cond_goodbye;     //semaforos para sincronizar a ordem de execucao das threads
+
+sem_t em; // Semáforo binário, para exclusão mútua
+sem_t cond_stay, cond_goodbye; // Semáforos para sincronizar a ordem de execução das threads
 
 // Thread 2 - Mensagem: "Seja bem-vindo!"
 void* welcome(void* args) {
@@ -24,6 +22,8 @@ void* welcome(void* args) {
   pthread_exit(NULL);
 }
 
+// Thread 1 - Mensagem: "Fique a vontade."
+// Thread 4 - Mensagem: "Sente-se por favor."
 void* staying(void* args) {
   int tid = *(int*) args;
 
@@ -40,44 +40,45 @@ void* staying(void* args) {
   pthread_exit(NULL);
 }
 
+// Thread 3 - Mensagem: "Volte sempre!"
 void* goodbye(void* args) {
   sem_wait(&cond_goodbye); // Espera todas as staying() executarem
+
   printf("Volte sempre!\n");
   
   pthread_exit(NULL);
 }
 
-
 int main() {
   pthread_t tid[NTHREADS];
   int *id[NTHREADS], i;
 
-  for (i=0; i<NTHREADS; i++) {
+  // Preenchendo os identificadores das threads
+  for (i = 0; i < NTHREADS; i++) {
     if ((id[i] = malloc(sizeof(int))) == NULL) {
       pthread_exit(NULL); return 1;
     }
     *id[i] = i+1;
   }
 
-  //inicia os semaforos
-  sem_init(&em, 0, 0); // Semáforo binário, para exclusão mútua
+  // Inicia os semáforos
+  sem_init(&em, 0, 1);
   sem_init(&cond_stay, 0, 0);
   sem_init(&cond_goodbye, 0, 0);
 
-  //cria as tres threads
+  // Criando as threads
   if (pthread_create(&tid[1], NULL, welcome, (void *)id[1])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
   if (pthread_create(&tid[0], NULL, staying, (void *)id[0])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
   if (pthread_create(&tid[3], NULL, staying, (void *)id[3])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
   if (pthread_create(&tid[2], NULL, goodbye, (void *)id[2])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
 
-  //--espera todas as threads terminarem
-  for (i=0; i<NTHREADS; i++) {
+  // Esperando todas as threads terminarem
+  for (i = 0; i < NTHREADS; i++) {
     if (pthread_join(tid[i], NULL)) {
-      printf("--ERRO: pthread_join() \n"); exit(-1); 
+      printf("ERRO!! --> pthread_join()\n");
+      return -1; 
     } 
     free(id[i]);
   } 
   pthread_exit(NULL);
-
-  return 0;
 }
