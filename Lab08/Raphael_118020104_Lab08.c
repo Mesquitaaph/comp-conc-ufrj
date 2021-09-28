@@ -13,7 +13,7 @@
 #define NTHREADS 4
 
 // Variaveis globais
-int msgs = 2; // Número de mensagens a serem impressas depois da T1 e antes da T3
+int msgs = 2; // Número de mensagens a serem impressas depois da T2 e antes da T3
 
 sem_t em; // Semáforo binário, para exclusão mútua
 sem_t cond_stay, cond_goodbye; // Semáforos para sincronizar a ordem de execução das threads
