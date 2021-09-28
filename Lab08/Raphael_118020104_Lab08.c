@@ -1,3 +1,10 @@
+/* Disciplina: Computacao Concorrente */
+/* Prof.: Silvana Rossetto */
+/* Módulo 3 - Laboratório: 8 */
+/* Codigo: Ordem de execução das threads controlada por semáforos */
+/* Aluno: Raphael Mesquita */ 
+/* DRE: 118020104 */ 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -67,10 +74,10 @@ int main() {
   sem_init(&cond_goodbye, 0, 0);
 
   // Criando as threads
-  if (pthread_create(&tid[1], NULL, welcome, (void *)id[1])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
-  if (pthread_create(&tid[0], NULL, staying, (void *)id[0])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
-  if (pthread_create(&tid[3], NULL, staying, (void *)id[3])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
-  if (pthread_create(&tid[2], NULL, goodbye, (void *)id[2])) { printf("--ERRO: pthread_create()\n"); exit(-1); }
+  if (pthread_create(&tid[1], NULL, welcome, (void *)id[1])) { printf("ERRO!! --> pthread_create()\n"); exit(-1); }
+  if (pthread_create(&tid[0], NULL, staying, (void *)id[0])) { printf("ERRO!! --> pthread_create()\n"); exit(-1); }
+  if (pthread_create(&tid[3], NULL, staying, (void *)id[3])) { printf("ERRO!! --> pthread_create()\n"); exit(-1); }
+  if (pthread_create(&tid[2], NULL, goodbye, (void *)id[2])) { printf("ERRO!! --> pthread_create()\n"); exit(-1); }
 
   // Esperando todas as threads terminarem
   for (i = 0; i < NTHREADS; i++) {
