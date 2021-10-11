@@ -6,7 +6,7 @@
 <br>
 
 <center>Instituto de Computação/UFRJ</center>
-<center>9 de outubro de 2021</center>
+<center>11 de outubro de 2021</center>
 <br>
 <center>Raphael Felipe de Cantuaria Mesquita | DRE 118020104</center>
 <br>
@@ -143,6 +143,95 @@ Dessa forma não é preciso verificar a quantidade de elementos no buffer para t
 </p>
 
 ### Questão 3:
+a)
+```c
+// Conta leitores lendo e escritores querendo escrever
+int leitores = 0, escritores = 0;
+sem_t l_mutex, e_mutex, tentaLer, escrita; // Todos inicializados com 1
+
+void *leitor() {
+	while(1) {  
+		sem_wait(&tentaLer); // Indica que um leitor esta tentando ler  
+
+		// Entra na seção crítica dos leitores
+		sem_wait(&l_mutex);
+		leitores++; 			// Leitor sinaliza que vai ler
+		if (leitores == 1) 		// O primeiro leitor bloqueia a escrita
+			sem_wait(&escrita);
+		sem_post(&l_mutex);
+		// Sai da seção crítica dos leitores
+
+		sem_post(&tentaLer); // Indica que a leitura foi liberada 
+
+		// SC: Realiza a leitura
+
+		// Entra na seção crítica dos escritores
+		sem_wait(&l_mutex);
+		leitores--;				// Leitor sinaliza que terminou de ler
+		if (leitores == 0) 		// O último leitor libera a escrita
+			sem_post(&escrita);
+		sem_post(&l_mutex);
+		// Sai da seção crítica dos escritores
+	}
+	pthread_exit(NULL);
+}
+
+void *escritor(){
+	while(1){
+		// Entra na seção crítica dos escritores
+		sem_wait(&e_mutex);
+		escritores++;		 // Escritor sinaliza que quer ler
+		if (escritores == 1) // O primeiro escritor impede que leitores tentem ler
+			sem_wait(&tentaLer);
+		sem_post(&e_mutex);  
+
+		// Entra na seção crítica da escrita
+		sem_wait(&escrita);
+		// SC: Realiza a escrita
+		sem_post(&escrita);
+		// Sai da seção crítica da escrita  
+
+		// Entra na seção crítica dos escritores
+		sem_wait(&e_mutex);
+		escritores--;		// Escritor sinaliza que parou de ler
+		if (escritores == 0)// O último escritor libera que os leitores tentem ler
+			sem_post(&tentaLer);
+		sem_post(&e_mutex);
+		// Sai da seção crítica dos escritores
+	}
+	pthread_exit(NULL);
+}
+
+```
+
+b)
+<p>
+
+O código acima é uma variação do código apresentado na aula *Aula 2* do *Módulo 3 - Semana 2*.
+</p>
+<p>
+
+A função dos leitores é praticamente idêntica, com a única diferença sendo a exclusão mútuta da *tentativa de leitura*. Um leitor, antes de ler, ele tenta ler. Esta tentativa de leitura é uma seção crítica com exclusão mútua, ou seja, enquanto uma *thread* tenta ler, as outras ficam travadas. Além disso, para essa implementação, um escritor sinalizar que quer ler **também** trava os leitores. Como é possível ver no trecho abaixo
+</p>
+
+```c
+// Entra na seção crítica dos escritores
+sem_wait(&e_mutex);
+escritores++;		 // Escritor sinaliza que quer ler
+if (escritores == 1) // O primeiro escritor impede que leitores tentem ler
+	sem_wait(&tentaLer);
+sem_post(&e_mutex); 
+```
+
+<p>
+
+Agora explicando um pouco melhor o alterado no função dos escritores, já sabemos que que quando querem escrever, as tentativas de leitura são bloqueadas. Na verdade isso é um solução muito parecida com o modo que os leitores travam a escrita. Assim como o primeiro escritor trava a tentativa dos leitores e o último a escrever destrava, os leitores travam e destravam a escrita em condições análogas.
+</p>
+
+<p>
+
+Este conceito de trava o outro tipo de *thread* enquanto um está lendo ou querendo escrever faz com que as leituras sejam feitas juntas somente com outras leitoras e nunca quando há escritores atuando. E como a escrita é uma seção crítica com exclusão mútua, percebemos que os requisitos colocados são atendidos, sem condições de corrida. E como para toda leitura há um momento que trava e outro que destrava a escrita e para a escrita há um momento que trava e outro que destrava a tentativa de leitura, não há *deadlocks*, já que estes são os únicos momentos que temos semáforos condicionais. Todos os outros são para exclusão mútua.
+</p>
 
 ### Questão 4:
 a)
@@ -176,5 +265,5 @@ Não existe esta possibilidade no semáforo $x$, pois ele atua como uma variáve
 </p>
 <p>
 
-Já para os outros semáforos, a única chance de ocorrer o acúmulo indevido de sinais seria caso a `notify()` e a `notifyAll()` enviassem sinais demais para o semáforo $h$. Mas isso não ocorre, pois o semáforo $x$ garante que o número de threads esperando, na variável $aux$, seja sempre lido, incrementado ou decrementado sem ser afetada pela condição de corrida. Dessa forma os sinais são sempre enviados às *threads* esperando notificação de forma consistente.
+Já para os outros semáforos, a única chance de ocorrer o acúmulo indevido de sinais seria caso a `notify()` e a `notifyAll()` enviassem sinais demais para o semáforo $h$. Mas isso não ocorre, pois o semáforo $x$ garante que o número de threads esperando, na variável $aux$, seja sempre lido, incrementado ou decrementado sem ser afetada pela condição de corrida. Dessa forma os sinais são sempre enviados às *threads* esperando notificação de forma consistente, com elas consumindo os seus respectivos sinais em seguida.
 </p>
