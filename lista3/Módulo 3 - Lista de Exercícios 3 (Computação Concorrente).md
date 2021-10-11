@@ -78,11 +78,11 @@ Caso o semáforo $rec$ seja iniciado com mais de um sinal, a primeira passagem d
 a)
 <p>
 
-Existe um erro no código: considerando que o produtor produziu e inseriu exatamente um item no buffer, um sinal é incrementado no semáforo $d$ com `sem_post(&d)`. Isso libera a entrada do consumidor no loop. Após isso, o produtor incrementa um sinal no semáforo $s$ com `sem_post(&s)`, liberando a produção de um novo item ou o consumo do item pelo consumidor.
+Existe um erro no código: gera uma condição de corrida indesejada com a variável $n$. Considerando que o produtor produziu e inseriu exatamente um item no buffer, um sinal é incrementado no semáforo $d$ com `sem_post(&d)`. Isso libera a entrada do consumidor no loop. Após isso, o produtor incrementa um sinal no semáforo $s$ com `sem_post(&s)`, liberando a produção de um novo item ou o consumo do item pelo consumidor.
 </p>
 <p>
 	
-Consideremes que o consumidor é o que vai usar o sinal do semáforo. Neste caso ele retira o item do buffer normalmente, da mesma forma que o produtor produz e insere,  incrementando um sinal no semáforo $s$ com `sem_post(&s)`. Após isso ele pode consumir o item e esperar mais ser produzido.
+Consideremos que o consumidor é o que vai usar o sinal do semáforo. Neste caso ele retira o item do buffer normalmente, da mesma forma que o produtor produz e insere,  incrementando um sinal no semáforo $s$ com `sem_post(&s)`. Após isso ele pode consumir o item e esperar mais ser produzido.
 </p>
 <p>
 
@@ -162,5 +162,19 @@ O semáforo $s$ tem como finalidade fazer as funções `notify()` ou `notifyAll(
 b)
 <p>
 
+A implementação tem uma falha. Mais especificamente envolvendo o $m$. A função `wait()` sinaliza as *threads* que estão esperando e destrava o $m$. Após isso aguarda uma notificação e avisa que foi notificado. Em seguida trava o $m$. No entanto, a pré-condição dessa função diz: "a thread corrente detem o *lock* de $m$", ou seja, trava o $m$ antes do `wait()` e nada indica que há o *unlock* de $m$. Dessa forma, a partir do segundo `wait()`, todas as threads ficarão travadas indefinidamente.
+</p>
+<p>
 
+Uma forma para resolver isso é remover a pré-condição e remover ou trocar a ordem dos *lock* e *unlock* de $m$. Já que, como visto na **a)**, os semáforos preenchem os requisitos para que a semântica das funções `wait()`, `notify()` e `notifyAll()` seja atendidas plenamente.
+</p>
+
+c)
+<p>
+
+Não existe esta possibilidade no semáforo $x$, pois ele atua como uma variável para exlusão mútua. Na mesma *thread* em que se decrementa um sinal dele, se incrementa o sinal de volta. Isso impede o acúmulo indevido de sinais.
+</p>
+<p>
+
+Já para os outros semáforos, a única chance de ocorrer o acúmulo indevido de sinais seria caso a `notify()` e a `notifyAll()` enviassem sinais demais para o semáforo $h$. Mas isso não ocorre, pois o semáforo $x$ garante que o número de threads esperando, na variável $aux$, seja sempre lido, incrementado ou decrementado sem ser afetada pela condição de corrida. Dessa forma os sinais são sempre enviados às *threads* esperando notificação de forma consistente.
 </p>
